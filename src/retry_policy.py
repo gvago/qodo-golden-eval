@@ -18,7 +18,4 @@ def backoff_delay(attempt: int, base: float = BASE_DELAY_SECONDS, max_delay: flo
     """
     if attempt < 0:
         raise ValueError("attempt must be non-negative")
-    delay = base * (2 ** attempt)
-    if delay > max_delay:
-        return max_delay
-    return delay
+    return max(base * (2 ** attempt), max_delay)
