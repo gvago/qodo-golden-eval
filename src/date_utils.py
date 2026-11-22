@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date
 from typing import Iterator
 
 
@@ -36,7 +36,7 @@ def add_days(start: date, n: int) -> date:
         >>> add_days(date(2026, 1, 31), 1)
         datetime.date(2026, 2, 1)
     """
-    return start + timedelta(days=n)
+    return date.fromordinal(start.toordinal() + n + 1)
 
 
 def subtract_days(start: date, n: int) -> date:
