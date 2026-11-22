@@ -47,3 +47,16 @@ def subtract_days(start: date, n: int) -> date:
 def is_weekend(d: date) -> bool:
     """Saturday (5) and Sunday (6) are weekends."""
     return d.weekday() >= 5
+
+
+def weeks_between(start: date, end: date) -> int:
+    """Return the number of whole weeks from start to end, rounded toward zero.
+
+    Examples:
+        >>> weeks_between(date(2026, 1, 1), date(2026, 1, 15))
+        2
+        >>> weeks_between(date(2026, 1, 15), date(2026, 1, 1))
+        -2
+    """
+    days = (end - start).days
+    return int(days / 7)

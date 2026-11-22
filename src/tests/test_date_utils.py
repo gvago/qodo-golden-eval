@@ -4,7 +4,7 @@ from __future__ import annotations
 import unittest
 from datetime import date
 
-from src.date_utils import DateRange, add_days, is_weekend, subtract_days
+from src.date_utils import DateRange, add_days, is_weekend, subtract_days, weeks_between
 from src.parser import parse_date_range
 
 
@@ -45,6 +45,20 @@ class TestDateRange(unittest.TestCase):
 
     def test_parse_date_range_plus_days_spec_sets_end(self) -> None:
         self.assertEqual(parse_date_range("2026-01-01+7d").end, date(2026, 1, 8))
+
+
+class TestWeeksBetween(unittest.TestCase):
+    def test_weeks_between_two_weeks_apart_returns_two(self) -> None:
+        self.assertEqual(weeks_between(date(2026, 1, 1), date(2026, 1, 15)), 2)
+
+    def test_weeks_between_partial_week_rounds_toward_zero(self) -> None:
+        self.assertEqual(weeks_between(date(2026, 1, 1), date(2026, 1, 13)), 1)
+
+    def test_weeks_between_reversed_dates_returns_negative(self) -> None:
+        self.assertEqual(weeks_between(date(2026, 1, 15), date(2026, 1, 1)), -2)
+
+    def test_weeks_between_reversed_partial_week_rounds_toward_zero(self) -> None:
+        self.assertEqual(weeks_between(date(2026, 1, 13), date(2026, 1, 1)), -1)
 
 
 if __name__ == "__main__":
