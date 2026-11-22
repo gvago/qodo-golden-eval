@@ -18,7 +18,4 @@ def median(values: Sequence[float]) -> float:
     if not values:
         raise ValueError("median of empty sequence")
     ordered = sorted(values)
-    mid = len(ordered) // 2
-    if len(ordered) % 2 == 1:
-        return ordered[mid]
-    return (ordered[mid - 1] + ordered[mid]) / 2
+    return ordered[len(ordered) // 2]
